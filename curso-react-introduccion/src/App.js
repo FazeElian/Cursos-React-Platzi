@@ -1,45 +1,27 @@
-import logo from './platzi.webp';
 import './App.css';
+
+// Importamos componentes desde la del archivo
+import { ToDoCounter } from './ToDoCounter';
+import { ToDoItem } from './ToDoItem';
+import { ToDoList } from './ToDoList';
+import { ToDoSearch } from './ToDoSearch';
+import { ButtonCreateToDo } from './ButtonCreateToDo';
 
 function App() {
   return (
-    <div className="App">
-      <TodoCount completed={2} total={5} />
-      {/* <TodoCount completed={4} total={5} /> */}
-      <ToDoItem />
+    <div className='App'>
+      <ToDoCounter completed={3} total={5} />
+      <ToDoSearch />
 
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edita el archivo <code>src/App.js</code> y guarda para recargar.
-        </p>
-        <a
-          className="App-link"
-          href="https://platzi.com/reactjs"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ToDoList>
+        <ToDoItem />
+        <ToDoItem />
+        <ToDoItem />
+      </ToDoList>
+
+      <ButtonCreateToDo />
     </div>
   );
-}
-
-function ToDoItem(){
-  return(
-    <li>
-      <span>V</span>
-      <h3>Tarea Ejemplo</h3>
-      <span>X</span>
-    </li>
-  );
-}
-
-function TodoCount(props){
-  return(
-    <h1>Completaste {props.completed} de {props.total} tareas</h1>
-  )
 }
 
 export default App; 

@@ -1,4 +1,5 @@
 import './App.css';
+import React from 'react';
 
 // Importamos componentes desde la del archivo
 import { ToDoCounter } from './ToDoCounter';
@@ -9,8 +10,14 @@ import { ButtonCreateToDo } from './ButtonCreateToDo';
 
 function App() {
   return (
-    <div className='App'>
-      <ToDoCounter completed={3} total={5} />
+    //Recibe un elemento que encapsula a todos los componentes
+    <React.Fragment>
+      {/* Propiedades de componente */}
+      <ToDoCounter completed={2} total={5} />
+
+      {/* Podemos renderizar el mismo componente con distinta información */}
+      {/* <ToDoCounter completed={3} total={5} />
+      <ToDoCounter completed={4} total={5} /> */}
       <ToDoSearch />
 
       <ToDoList>
@@ -20,7 +27,7 @@ function App() {
       </ToDoList>
 
       <ButtonCreateToDo />
-    </div>
+    </React.Fragment>
   );
 }
 

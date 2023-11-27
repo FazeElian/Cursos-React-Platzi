@@ -1,7 +1,7 @@
 // Componente contador de tareas
-function ToDoCounter(props){
+function ToDoCounter({ completed, total })  {
     return(
-      <h1>Completaste {props.completed} de {props.total} tareas</h1>
+      <h1>Completaste {completed} de {total} tareas</h1>
     )
 }
 

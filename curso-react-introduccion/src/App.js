@@ -1,5 +1,7 @@
-import './App.css';
 import React from 'react';
+
+// Estilos de App
+import "./App.css";
 
 // Importamos componentes desde la del archivo
 import { ToDoCounter } from './ToDoCounter';
@@ -19,25 +21,30 @@ const defaultToDos = [
 function App() {
   return (
     //Recibe un elemento que encapsula a todos los componentes
-    <React.Fragment>
-      {/* Propiedades de componente */}
-      <ToDoCounter completed={2} total={5} />
+    <>
+      <div className="app-tasks">
+        <div className="cont-create">
+          <ButtonCreateToDo />
+        </div>
+        <div className="cont-tasks">
+          {/* Propiedades de componente */}
+          <ToDoCounter completed={2} total={5} />
 
-      {/* Podemos renderizar el mismo componente con distinta información */}
-      {/* <ToDoCounter completed={3} total={5} />
-      <ToDoCounter completed={4} total={5} /> */}
-      <ToDoSearch />
+          {/* Podemos renderizar el mismo componente con distinta información */}
+          {/* <ToDoCounter completed={3} total={5} />
+          <ToDoCounter completed={4} total={5} /> */}
+          <ToDoSearch />
 
-      <ToDoList>
-        {/* Crea un arreglo a partir del arreglo inicial con el método map */}
-        {defaultToDos.map(toDo => (
-          // Utilizamos la propiedad Key para identificar de forma única cada objeto del arreglo
-          <ToDoItem key={toDo.text} text={toDo.text} completed={toDo.completed} /> 
-        ))}
-      </ToDoList>
-
-      <ButtonCreateToDo />
-    </React.Fragment>
+          <ToDoList>
+            {/* Crea un arreglo a partir del arreglo inicial con el método map */}
+            {defaultToDos.map(toDo => (
+              // Utilizamos la propiedad Key para identificar de forma única cada objeto del arreglo
+              <ToDoItem key={toDo.text} text={toDo.text} completed={toDo.completed} /> 
+            ))}
+          </ToDoList>
+        </div>
+      </div>
+    </>
   );
 }
 

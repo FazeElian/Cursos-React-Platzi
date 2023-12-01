@@ -1,38 +1,167 @@
-.App {
-  text-align: center;
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: "Cambria";
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* App */
+.app-tasks{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-image: radial-gradient(
+        circle at 50% 78.89%, 
+        #c76dff 0, #8c59ff 25%,
+        #4d42d4 50%, #002ca6 75%,
+        #00197b 100%
+    );
+    border: 2px solid black inset;
+    justify-content: space-between;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Contenedores Componentes App */
+.cont-tasks,
+.cont-create{
+    display: flex;
+    width: 50%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
-.App-header {
-  background-color: #233553;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.cont-tasks{
+    border-left: 3px dashed black;
 }
 
-.App-link {
-  color: #97ca3f;
+/* Título tareas - ToDoCounter */
+.title-tasks{
+    display: flex;
+    width: 80%;
+    height: auto;
+    background-image: linear-gradient(
+        170deg, #006ce9 0, 
+        #0068eb 8.33%, #0063eb 16.67%,
+        #005de9 25%, #0056e4 33.33%, 
+        #004ddd 41.67%, #4d42d4 50%, 
+        #7135c9 58.33%, #8a23bc 66.67%, 
+        #9e00ad 75%, #ad009e 83.33%, 
+        #b9008d 91.67%, #c3007c 100%
+    );
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    color: white;
+    font-size: 28px;
+    border-radius: 1rem;
+    margin: 0 0 1.5rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.cont-search{
+    display: flex;
+    width: 50%;
+    height: 40px;
+    margin: 0 0 2rem;
+}
+
+.cont-search input{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+        170deg, 
+        #7d5ae7 0, 
+        #4d42d4 50%, 
+        #002dc1 100%
+    );    
+    border-radius: 2rem;
+    outline: none;
+    padding: 5px 1rem 5px;
+    border: none;
+}
+
+.cont-search input::placeholder,
+.cont-search input{
+    color: white;
+    font-size: 18px;
+}
+
+.cont-list-tasks{
+    display: flex;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.item-task{
+    display: flex;
+    width: 50%;
+    height: auto;
+    margin: 10px 0 10px;
+    border-radius: 2rem;
+    background-color: purple;
+    padding: 10px 1.5rem 10px;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 16px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.item-task .checked-icon{
+    display: none;
+}
+
+.item-task h3{
+    font-weight: lighter;
+}
+
+.item-task:hover,
+.btn-create:hover{
+    opacity: 0.7;
+    transition: .3s;
+}
+
+.item-task span{
+    height: 100%;
+    width: auto;
+}
+
+.item-task span img{
+    width: 25px;
+    height: 25px;
+}
+
+.item-task-completed{
+    background-color: greenyellow;
+    color: black;
+    text-decoration: line-through;
+}
+
+.item-task-completed .check-icon{
+    display: none;
+}
+
+.item-task-completed .checked-icon{
+    display: flex;
+}
+
+.btn-create{
+    display: flex;
+    width: auto;
+    height: auto;
+    padding: 10px 3rem 10px;
+    font-size: 18px;
+    color: white;
+    background-color: purple;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2rem;
+    border: 1px solid black;
+    cursor: pointer;
 }

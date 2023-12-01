@@ -1,7 +1,9 @@
 // Componoente para buscar tarea
 function ToDoSearch(){
     return(
-      <input type="search" placeholder="Buscar Tarea"></input>
+      <div className="cont-search">
+        <input type="search" placeholder="Buscar Tarea" id="search-task"></input>
+      </div>
     )
 }
 

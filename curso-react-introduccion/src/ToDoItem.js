@@ -1,9 +1,9 @@
 // Componente Item de Tarea
-function ToDoItem(){
+function ToDoItem(props){
     return(
       <li>
         <span>V</span>
-        <h3>Tarea Ejemplo</h3>
+        <h3>{props.text}</h3>
         <span>X</span>
       </li>
     );

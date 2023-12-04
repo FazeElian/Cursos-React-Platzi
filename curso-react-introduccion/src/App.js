@@ -11,10 +11,11 @@ import { ToDoSearch } from './ToDoSearch';
 import { ButtonCreateToDo } from './ButtonCreateToDo';
 
 // Lista de Tareas
-const defaultToDos = [
+const defaultTasks = [
   { text: "Leer 30 min", completed: true },
   { text: "Ser Senior", completed: false },
   { text: "Ser ingeniero de Software", completed: false },
+  { text: "MESSI", completed: true },
   { text: "Aprender JavaScript", completed: true }
 ];
 
@@ -27,14 +28,26 @@ function App() {
   // console.log("Los usuarios buscan tareas de " + searchValue)
 
   // Nuevo estado de Taeas
-  const [tasks, setTasks] = React.useState(defaultToDos); // Le damos un estado inicial con el array
+  const [tasks, setTasks] = React.useState(defaultTasks); // Le damos un estado inicial con el array
 
   // Contar cuántas tareas cumplen el estado = completed true
   // La doble negación: "!!" va a convertir el valor a booleano
-  const completedTasks = tasks.filter(task => !!task.completed).length;
-
-  
+  const completedTasks = tasks.filter(
+    task => !!task.completed
+  ).length;
   const totalTasks = tasks.length;
+
+  // Estados derivados de búsqueda a partir de la lista de tareas
+  const searchedTasks = tasks.filter(
+    // Por cada Tarea verificar si incluye un valor desde el valor de input de búsqueda en su text
+    (task) => {
+      // Lowarcase permite mostrar valores que sean buscados van a ser convertidos a minúsculas
+      const taskText = task.text.toLowerCase();
+      const searchText = searchValue.toLowerCase();
+
+      return taskText.includes(searchText);
+    }
+  );
 
   return (
     //Recibe un elemento que encapsula a todos los componentes
@@ -58,9 +71,9 @@ function App() {
 
           <ToDoList>
             {/* Crea un arreglo a partir del arreglo inicial con el método map */}
-            {defaultToDos.map(toDo => (
+            {searchedTasks.map(task => (
               // Utilizamos la propiedad Key para identificar de forma única cada objeto del arreglo
-              <ToDoItem key={toDo.text} text={toDo.text} completed={toDo.completed} /> 
+              <ToDoItem key={task.text} text={task.text} completed={task.completed} /> 
             ))}
           </ToDoList>
         </div>

@@ -1,14 +1,10 @@
 import React from "react";
 
 // Componoente para buscar tarea
-function ToDoSearch(){
-  // Creamos un estado y otro para cambiarlo
-  // Además le damos un valor default = ""
-  const [taskValue, setTaskValue] = React.useState("");
-
-  // Verificamos que sí está recibiendo y actualizando el nuevo valor de búsqueda
-  // console.log("Los usuarios buscan tareas de " + taskValue)
-
+function ToDoSearch({
+  taskValue, 
+  setTaskValue,
+}) {
   return(
     <div className="cont-search">
       <input 

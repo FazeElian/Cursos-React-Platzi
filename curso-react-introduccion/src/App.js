@@ -12,11 +12,11 @@ import { ButtonCreateToDo } from './ButtonCreateToDo';
 
 // Lista de Tareas
 const defaultTasks = [
-  { text: "Leer 30 min", completed: true },
+  { text: "Leer 30 min", completed: false },
   { text: "Ser Senior", completed: false },
   { text: "Ser ingeniero de Software", completed: false },
-  { text: "MESSI", completed: true },
-  { text: "Aprender JavaScript", completed: true }
+  { text: "MESSI", completed: false },
+  { text: "Aprender JavaScript", completed: false }
 ];
 
 function App() {
@@ -49,6 +49,36 @@ function App() {
     }
   );
 
+  // Función para actualizar estado 
+  const onCompleted = (text) => {
+    // Tenemos un array inicial y creamos una copia con "..."
+    const newTasks = [...tasks];
+    
+    // Buscamos la tarea a cambiar su estado por medio de la función de arrays
+    // findIndex ()
+    const taskIndex = newTasks.findIndex(
+      (task) => task.text === text
+    );
+
+    newTasks[taskIndex].completed = true; // Cambia estado a verdadero
+    setTasks(newTasks);
+  };
+
+  // Función para actualizar estado a no completado 
+  const noCompleted = (text) => {
+    // Tenemos un array inicial y creamos una copia con "..."
+    const newTasks = [...tasks];
+    
+    // Buscamos la tarea a cambiar su estado por medio de la función de arrays
+    // findIndex ()
+    const taskIndex = newTasks.findIndex(
+      (task) => task.text === text
+    );
+
+    newTasks[taskIndex].completed = false; // Cambia estado a falso
+    setTasks(newTasks);
+  };
+
   return (
     //Recibe un elemento que encapsula a todos los componentes
     <>
@@ -73,7 +103,13 @@ function App() {
             {/* Crea un arreglo a partir del arreglo inicial con el método map */}
             {searchedTasks.map(task => (
               // Utilizamos la propiedad Key para identificar de forma única cada objeto del arreglo
-              <ToDoItem key={task.text} text={task.text} completed={task.completed} /> 
+              <ToDoItem 
+                key={task.text} 
+                text={task.text} 
+                noCompleted={() => noCompleted(task.text)}
+                completed={task.completed} 
+                onCompleted={() => onCompleted(task.text)}
+              /> 
             ))}
           </ToDoList>
         </div>

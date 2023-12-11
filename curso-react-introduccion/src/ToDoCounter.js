@@ -1,10 +1,21 @@
 // Componente contador de tareas
 function ToDoCounter({ completed, total })  {
     return(
-      // <h1 style={styles}>Completaste {completed} de {total} tareas</h1>
-      <div className="title-tasks">
-        Completaste {completed} de {total} tareas
-      </div>
+        total === completed ?
+          <>
+            <div className="title-tasks">
+              Completaste {completed} de {total} tareas
+            </div>
+
+            <div className="title-all-tasks-completed">
+              Has completado todas las tareas!
+            </div>
+          </>
+        :
+
+        <div className="title-tasks">
+          Completaste {completed} de {total} tareas
+        </div>
     )
 }   
 

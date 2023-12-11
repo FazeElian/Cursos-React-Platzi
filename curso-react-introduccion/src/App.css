@@ -59,6 +59,21 @@
     margin: 0 0 1.5rem;
 }
 
+.title-all-tasks-completed{
+    display: flex;
+    width: 80%;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    font-size: 22px;
+    border-radius: 1rem;
+    margin: 0 0 1.5rem;
+    background-color: greenyellow;
+    border: 1px solid black;
+}
+
 .cont-search{
     display: flex;
     width: 50%;

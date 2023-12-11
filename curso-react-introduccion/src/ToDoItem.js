@@ -16,10 +16,18 @@ function ToDoItem(props){
         <img src={checkIcon} alt="" />
       </span>
 
-      <span className="checked-icon"><img src={checkedIcon} alt=""
-      onClick={props.noCompleted}></img></span>
+      <span 
+        className="checked-icon"
+        onClick={props.noCompleted}
+      >
+        <img src={checkedIcon} alt="" />
+      </span>
       <h3>{props.text}</h3>
-      <span><img src={deleteIcon} alt=""></img></span>
+        <span 
+          onClick={props.deleteTask}
+        >
+          <img src={deleteIcon} alt="" />
+        </span>
     </div>
   );
 }

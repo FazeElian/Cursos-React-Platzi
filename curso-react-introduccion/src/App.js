@@ -79,6 +79,21 @@ function App() {
     setTasks(newTasks);
   };
 
+  // Función para eliminar tarea
+  const deleteTask = (text) => {
+    // Tenemos un array inicial y creamos una copia con "..."
+    const newTasks = [...tasks];
+    
+    // Buscamos la tarea a cambiar su estado por medio de la función de arrays
+    // findIndex ()
+    const taskIndex = newTasks.findIndex(
+      (task) => task.text === text
+    );
+
+    newTasks.splice(taskIndex, 1); // Eliminamos 1 elemento con splice()
+    setTasks(newTasks);
+  };
+
   return (
     //Recibe un elemento que encapsula a todos los componentes
     <>
@@ -109,6 +124,7 @@ function App() {
                 noCompleted={() => noCompleted(task.text)}
                 completed={task.completed} 
                 onCompleted={() => onCompleted(task.text)}
+                deleteTask={() => deleteTask(task.text)}
               /> 
             ))}
           </ToDoList>

@@ -22,19 +22,36 @@ import { ButtonCreateToDo } from './ButtonCreateToDo';
 // localStorage.setItem("Tareas_v1", JSON.parse(defaultTasks));
 // localStorage.removeItem("Tareas_v1");
 
-function App() {
-  const localStorageTasks = localStorage.getItem("Tareas_v1");
+// Custom Hook para controlar todo lo que tenga que ver con Local Storage
+function useLocalStorage (itemName, initialValue) {
+  const localStorageItem = localStorage.getItem(itemName);
 
-  let parsedTasks;
+  let parsedItem;
 
   // Si no hay tareas en el arreglo de tareas
-  if (!localStorageTasks) {
-    localStorage.setItem("Tareas_v1", JSON.stringify([])); // Va a guardar el array vacío al local storage
-    parsedTasks = []; // Será un string vacío 
+  if (!localStorageItem) {
+    localStorage.setItem(itemName, JSON.stringify(initialValue)); // Va a guardar el array vacío al local storage
+    parsedItem = initialValue; // Será un string vacío 
   } else{ // Sino si habían items, va a transformarlo a string
-    parsedTasks = JSON.parse(localStorageTasks);
+    parsedItem = JSON.parse(localStorageItem);
   }
+  
+  // Creación de nuestro propio estado para custom hook
+  const [item, setItem] = React.useState(parsedItem);
 
+  // Función para actualizar estado de tareas de local storage
+  const saveItem = (newItem) => { // Envúa nuevo array de tareas y los actualiza
+    localStorage.setItem(itemName, JSON.stringify(newItem));
+
+    // Guardamos nuevas tareas
+    setItem(newItem);
+  };
+
+  // Actualiza custom hook y local storage
+  return [item, saveItem];
+}
+
+function App() {
   // Estado inicial de Local Storage
   // let parsedTasks = JSON.parse(localStorageTasks);
 
@@ -46,7 +63,7 @@ function App() {
   // console.log("Los usuarios buscan tareas de " + searchValue)
 
   // Nuevo estado de Taeas
-  const [tasks, setTasks] = React.useState(parsedTasks); // Enviamos al estado tareas de local storage
+  const [tasks, saveTasks] = useLocalStorage("Tareas_v1", []); // Enviamos al estado tareas de local storage
 
   // Contar cuántas tareas cumplen el estado = completed true
   // La doble negación: "!!" va a convertir el valor a booleano
@@ -66,14 +83,6 @@ function App() {
       return taskText.includes(searchText);
     }
   );
-
-  // Función para actualizar estado de tareas de local storage
-  const saveTasks = (newTasks) => { // Envúa nuevo array de tareas y los actualiza
-    localStorage.setItem("Tareas_v1", JSON.stringify(newTasks));
-
-    // Guardamos nuevas tareas
-    setTasks(newTasks);
-  };
 
   // Función para actualizar estado 
   const onCompleted = (text) => {

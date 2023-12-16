@@ -10,16 +10,34 @@ import { ToDoList } from './ToDoList';
 import { ToDoSearch } from './ToDoSearch';
 import { ButtonCreateToDo } from './ButtonCreateToDo';
 
-// Lista de Tareas
-const defaultTasks = [
-  { text: "Leer 30 min", completed: false },
-  { text: "Ser Senior", completed: false },
-  { text: "Ser ingeniero de Software", completed: false },
-  { text: "MESSI", completed: false },
-  { text: "Aprender JavaScript", completed: false }
-];
+// Lista de Tareas por defecto
+// const defaultTasks = [
+//   { text: "Leer 30 min", completed: false },
+//   { text: "Ser Senior", completed: false },
+//   { text: "Ser ingeniero de Software", completed: false },
+//   { text: "MESSI", completed: false },
+//   { text: "Aprender JavaScript", completed: false }
+// ];
+
+// localStorage.setItem("Tareas_v1", JSON.parse(defaultTasks));
+// localStorage.removeItem("Tareas_v1");
 
 function App() {
+  const localStorageTasks = localStorage.getItem("Tareas_v1");
+
+  let parsedTasks;
+
+  // Si no hay tareas en el arreglo de tareas
+  if (!localStorageTasks) {
+    localStorage.setItem("Tareas_v1", JSON.stringify([])); // Va a guardar el array vacío al local storage
+    parsedTasks = []; // Será un string vacío 
+  } else{ // Sino si habían items, va a transformarlo a string
+    parsedTasks = JSON.parse(localStorageTasks);
+  }
+
+  // Estado inicial de Local Storage
+  // let parsedTasks = JSON.parse(localStorageTasks);
+
   // Creamos un estado y otro para cambiarlo
   // Además le damos un valor default = ""
   const [searchValue, setSearchValue] = React.useState("");
@@ -28,7 +46,7 @@ function App() {
   // console.log("Los usuarios buscan tareas de " + searchValue)
 
   // Nuevo estado de Taeas
-  const [tasks, setTasks] = React.useState(defaultTasks); // Le damos un estado inicial con el array
+  const [tasks, setTasks] = React.useState(parsedTasks); // Enviamos al estado tareas de local storage
 
   // Contar cuántas tareas cumplen el estado = completed true
   // La doble negación: "!!" va a convertir el valor a booleano
@@ -49,6 +67,14 @@ function App() {
     }
   );
 
+  // Función para actualizar estado de tareas de local storage
+  const saveTasks = (newTasks) => { // Envúa nuevo array de tareas y los actualiza
+    localStorage.setItem("Tareas_v1", JSON.stringify(newTasks));
+
+    // Guardamos nuevas tareas
+    setTasks(newTasks);
+  };
+
   // Función para actualizar estado 
   const onCompleted = (text) => {
     // Tenemos un array inicial y creamos una copia con "..."
@@ -61,7 +87,7 @@ function App() {
     );
 
     newTasks[taskIndex].completed = true; // Cambia estado a verdadero
-    setTasks(newTasks);
+    saveTasks(newTasks);
   };
 
   // Función para actualizar estado a no completado 
@@ -76,7 +102,7 @@ function App() {
     );
 
     newTasks[taskIndex].completed = false; // Cambia estado a falso
-    setTasks(newTasks);
+    saveTasks(newTasks);
   };
 
   // Función para eliminar tarea
@@ -91,7 +117,7 @@ function App() {
     );
 
     newTasks.splice(taskIndex, 1); // Eliminamos 1 elemento con splice()
-    setTasks(newTasks);
+    saveTasks(newTasks);
   };
 
   return (
